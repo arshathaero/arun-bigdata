@@ -1,0 +1,30 @@
+{
+    "json_datasets": {
+       "datasets": [
+          "product",
+          "sales",
+          "success",
+          "sales1",
+          "test_alpha",
+          "sales big data",
+          "sales date",
+          "big data",
+          "hell yeah",
+          "US Superstore data"
+       ],
+       "storage_id": [
+          "cc3765fd",
+          "fad84389",
+          "97dab856",
+          "5cacdeb1",
+          "17462512",
+          "32a53b4c",
+          "7abbab83",
+          "218aed2e",
+          "0eda2ee2",
+          "3e95fe36"
+       ],
+       "user_id": "123asdf"
+    },
+    "user_id": "123asdf"
+ }

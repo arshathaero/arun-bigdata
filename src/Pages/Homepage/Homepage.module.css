@@ -1,0 +1,23 @@
+.uploadTag{
+    border:1px solid rgb(214 60 131);
+    padding:5px 20px;
+    color: rgb(214 60 131);
+    transition: all .3s ease;
+    cursor: pointer;
+    border-radius: 5px;
+    float:right
+}
+.uploadTag:hover{
+    color:white;
+    background-color: rgb(214 60 131)
+}
+#icon{
+    transition: 0.2s ease-out;
+    cursor: pointer;
+   
+}
+
+#icon:hover{
+    transform: scale(1.3);
+
+}

@@ -1,25 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route, Switch,Redirect,useHistory,useLocation } from 'react-router-dom';
+import Layout from './Hoc/Layout'
+import Homepage from './Pages/Homepage/Homepage'
+import Search from './Pages/Search/Search'
+
+import Pinboard from './Pages/Pinboard/Pinboard'
+
+import Insights from './Pages/Insights/Insights'
+
+
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    <Switch>
+
+    <Route path='/search' ><Layout><Search  /></Layout></Route>
+
+    <Route path='/pinboard' ><Layout><Pinboard  /></Layout></Route>
+
+    <Route path='/insights' ><Layout><Insights  /></Layout></Route>
+    <Route path='/' exact><Layout><Homepage  /></Layout></Route>
+
+   </Switch>
+  )
 }
 
 export default App;
