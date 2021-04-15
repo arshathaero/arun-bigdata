@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container'
 
 const Header =() =>{
 
-    let iconColor = 'rgb(214 60 131)'
+    let iconColor = '#B148D2'
 
     let pathname= window.location.pathname
     return(

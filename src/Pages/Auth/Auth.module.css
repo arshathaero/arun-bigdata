@@ -1,0 +1,26 @@
+.heading{
+    font-weight: bold;
+    margin:20px 0;
+    
+}
+
+
+.text{
+    border:none;
+    outline: none;
+    background-color: #EFF2F6;
+    padding:10px;
+    width:80%;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+
+
+@media only screen  and (max-width: 500px) {
+
+
+    .text{
+        width:100%
+    }
+}

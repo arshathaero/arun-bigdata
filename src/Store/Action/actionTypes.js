@@ -1,0 +1,23 @@
+export const SIGNUP_START = "SIGNUP_START";
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_FAIL = "SIGNUP_FAIL";
+export const SIGNUP = "SIGNUP";
+
+
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGIN = "LOGIN";
+
+export const LOGOUT = "LOGOUT";
+
+
+
+export const PROFILE_START = "PROFILE_START";
+export const PROFILE_SUCCESS = "PROFILE_SUCCESS";
+export const PROFILE = "PROFILE";
+
+export const PROFILE_UPDATE_START = "PROFILE_UPDATE_START";
+export const PROFILE_UPDATE_SUCCESS = "PROFILE_UPDATE_SUCCESS";
+export const PROFILE_UPDATE_FAIL = "PROFILE_UPDATE_FAIL";
+export const PROFILE_UPDATE = "PROFILE_UPDATE";

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './Homepage.module.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -7,15 +7,22 @@ import Container from 'react-bootstrap/Container'
 
 import listData from '../../Data/listData.json'
 
-
+import axios from 'axios'
 
 
 const Homepage= () =>{
     let color = 'rgb(214 60 131)'
 
 let a = [1,2,3]
-
-
+    
+    useEffect(() => {
+        axios.get('http://34.227.94.228:8000/data', {
+            headers: {
+                Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk4NjUzLCJqdGkiOiI1MDY5ODFmOWY1NjU0NmJjOWVmODVjYjRjMDMwNmE0MyIsInVzZXJfaWQiOjJ9.Gra1kjR5V-x-E1xSzR7SK_xaHPZ7RfTfAcaov9g1pH0", //the token is a variable which holds the token
+              },
+        
+    }).then(res=>console.log(res))
+},[])
 
 
 console.log(listData.json_datasets.datasets)

@@ -3,6 +3,8 @@ import './App.css';
 import { Route, Switch,Redirect,useHistory,useLocation } from 'react-router-dom';
 import Layout from './Hoc/Layout'
 import Homepage from './Pages/Homepage/Homepage'
+import Auth from './Pages/Auth/Auth'
+
 import Search from './Pages/Search/Search'
 
 import Pinboard from './Pages/Pinboard/Pinboard'
@@ -13,16 +15,45 @@ import Insights from './Pages/Insights/Insights'
 
 function App() {
   
+
+
+  let authenticated = localStorage.getItem("token");
+
+
+
+  let history = useHistory();
+  let location = useLocation();
+
+  const ProtectedRoutes = ({ children, ...rest }) => {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          authenticated ? (
+            children
+          ) : (
+            <Redirect to={{ pathname: "/auth", state: { from: location } }} />
+          )
+        }
+      />
+    );
+  };
+
+
+
+
   return (
 
     <Switch>
 
     <Route path='/search' ><Layout><Search  /></Layout></Route>
 
-    <Route path='/pinboard' ><Layout><Pinboard  /></Layout></Route>
+    <ProtectedRoutes path='/pinboard' ><Layout><Pinboard  /></Layout></ProtectedRoutes>
 
-    <Route path='/insights' ><Layout><Insights  /></Layout></Route>
-    <Route path='/' exact><Layout><Homepage  /></Layout></Route>
+    <ProtectedRoutes path='/insights' ><Layout><Insights  /></Layout></ProtectedRoutes>
+      <ProtectedRoutes path='/' exact><Layout><Homepage /></Layout></ProtectedRoutes>
+      
+      <Route path='/auth'><Auth/></Route>
 
    </Switch>
   )
