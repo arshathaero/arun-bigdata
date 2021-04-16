@@ -21,3 +21,7 @@
     transform: scale(1.3);
 
 }
+
+.import input{
+    display: none;
+}

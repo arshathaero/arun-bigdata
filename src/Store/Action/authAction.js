@@ -32,7 +32,8 @@ export const signupStart = () => {
     email,
     
     password,
-    organization
+    organization,
+    form
   ) => {
     return {
       type: actionTypes.SIGNUP,
@@ -40,7 +41,8 @@ export const signupStart = () => {
       last_name: last_name,
       email: email,
       password: password,
-     organization:organization
+      organization: organization,
+     form:form
     };
   };
   
@@ -68,11 +70,11 @@ export const signupStart = () => {
     };
   };
   
-  export const login = (username, password) => {
+  export const login = (email, password) => {
     return {
       type: actionTypes.LOGIN,
   
-      username: username,
+      email: email,
       password: password,
     };
   };

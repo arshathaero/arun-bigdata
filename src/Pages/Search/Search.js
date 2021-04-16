@@ -22,6 +22,8 @@ import { Pie,Bar } from '@reactchartjs/react-chart.js'
 import Switch from '@material-ui/core/Switch';
 
 import searchData from '../../Data/searchData.json'
+import {color} from '../../Shared/Utility'
+
 const Search= () =>{
   const { transcript, resetTranscript } = useSpeechRecognition()
 const [listening,setListening] = useState(false)
@@ -48,7 +50,6 @@ useEffect(()=>{
 setSearchText(transcript)
 },[transcript])
 
-    let color = '#B148D2'
 
 
   

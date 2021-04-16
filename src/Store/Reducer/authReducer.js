@@ -3,10 +3,11 @@ const initialState = {
   error: null,
   loading: false,
   token: null,
+  signupData:null
 };
 
 const signupStart = (state, action) => {
-  return { ...state, error: null, token: null, loading: true };
+  return { ...state, error: null, signupData: null, loading: true };
 };
 
 const signupSuccess = (state, action) => {
@@ -14,20 +15,20 @@ const signupSuccess = (state, action) => {
     ...state,
     error: null,
     loading: false,
-    token: action.token,
+    signupData: action.token,
   };
 };
 
 const signupFail = (state, action) => {
-  return { ...state, error: action.err, loading: false };
+  return { ...state, error: action.err, loading: false,signupData:null };
 };
 
 const loginStart = (state, action) => {
-  return { ...state, loading: true };
+  return { ...state, loading: true,error:null,token:null };
 };
 
 const loginSuccess = (state, action) => {
-  return { ...state, loginToken: action.token, loading: false};
+  return { ...state, token: action.token, loading: false,error:null};
 };
 
 const loginFail = (state, action) => {
@@ -37,11 +38,7 @@ const loginFail = (state, action) => {
 
 const logout = (state, action) => {
   localStorage.removeItem("token");
-  localStorage.removeItem("username");
-  localStorage.removeItem("image");
-  localStorage.removeItem("accountType");
-  localStorage.removeItem("inviteCode");
-  localStorage.removeItem("notificationCount");
+  localStorage.removeItem("firstname");
 
   return { ...state, logintToken: null, loggedIn: false };
 };

@@ -11,11 +11,11 @@ import Pinboard from './Pages/Pinboard/Pinboard'
 
 import Insights from './Pages/Insights/Insights'
 
+import Profile from './Pages/Profile/Profile'
 
 
 function App() {
   
-
 
   let authenticated = localStorage.getItem("token");
 
@@ -46,11 +46,13 @@ function App() {
 
     <Switch>
 
-    <Route path='/search' ><Layout><Search  /></Layout></Route>
+    <ProtectedRoutes path='/search' ><Layout><Search  /></Layout></ProtectedRoutes>
 
     <ProtectedRoutes path='/pinboard' ><Layout><Pinboard  /></Layout></ProtectedRoutes>
 
-    <ProtectedRoutes path='/insights' ><Layout><Insights  /></Layout></ProtectedRoutes>
+      <ProtectedRoutes path='/insights' ><Layout><Insights /></Layout></ProtectedRoutes>
+      <ProtectedRoutes path='/profile' ><Layout><Profile  /></Layout></ProtectedRoutes>
+
       <ProtectedRoutes path='/' exact><Layout><Homepage /></Layout></ProtectedRoutes>
       
       <Route path='/auth'><Auth/></Route>

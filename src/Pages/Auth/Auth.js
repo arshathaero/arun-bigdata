@@ -1,10 +1,12 @@
 import React, { useEffect, useState,useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Spinner from "react-bootstrap/Spinner";
+
 import Button from "@material-ui/core/Button";
 import { useMediaQuery } from "react-responsive";
 import { useForm } from "react-hook-form";
-
+import {useHistory} from 'react-router-dom'
 import Col from "react-bootstrap/Col";
 import classes from "./Auth.module.css";
 import axios from '../../axios'
@@ -15,7 +17,9 @@ import * as actions from '../../Store/Action/index'
 
 
 const Auth = (props) => {
-
+let history = useHistory()
+  const token = useSelector(state => state.auth.token)
+  const signupData = useSelector(state => state.auth.signupData)
 
   const error = useSelector(state => state.auth.error)
   const loading = useSelector(state=>state.auth.loading)
@@ -24,6 +28,34 @@ const Auth = (props) => {
   let dispatch = useDispatch()
   const password = useRef({});
 
+
+
+  useEffect(() => {
+    if (signupData) {
+
+      setMode('Login');
+    
+     }
+      
+      
+      
+  }, [signupData])
+  
+
+
+  useEffect(() => {
+    if (token) {
+
+      history.push('/')
+      
+     }
+      
+      
+      
+  }, [token])
+  
+
+
   let color = "rgb(214 60 131)";
 
   const isMobile = useMediaQuery({ query: "(max-width: 550px)" });
@@ -31,10 +63,33 @@ const Auth = (props) => {
 
   const [mode, setMode] = useState("Login");
 
-  const { register, handleSubmit, watch, formState: { errors }, } = useForm();
+  const { register, handleSubmit, reset, watch, formState: { errors }, } = useForm();
+  
+  const { register:register1, handleSubmit:handleSubmit1, } = useForm();
+
+
+
   password.current = watch("password", "");
 
-  const onSubmit = (data) => {
+
+
+  const onSubmit1 = ( data) => {
+    
+    let datas = new FormData()
+
+
+    datas.append('email',data.email)
+
+    datas.append('password',data.password)
+    
+
+    console.log('sff')
+
+   dispatch(actions.login(data.email,data.password))
+  };
+
+  const onSubmit = ( data) => {
+    
     let datas = new FormData()
 
     datas.append('first_name', data.firstname)
@@ -48,26 +103,40 @@ const Auth = (props) => {
     datas.append('organization', data.organization)
     
 
-   dispatch(actions.signup(data.firstname,data.lastname,data.email,data.password,data.organization))
-
+   dispatch(actions.signup(data.firstname,data.lastname,data.email,data.password,data.organization,reset))
   };
 
   let loginForm = (
-    <form>
-      <input className={classes.text} type="email" placeholder="Email" />
-      <br />
-      <input className={classes.text} type="password" placeholder="Password" />
-      <br />
-      <br />
+    <form key={0} onSubmit={handleSubmit1(onSubmit1)}>
+      <input
+        className={classes.text}
+        type="email"
+        placeholder="Email"
+        style={{width:'80%'}}
+        {...register1("email", { required: true })}
+      />
+   
+       
+      <input
+        className={classes.text}
+        type="password"
+        placeholder="Password"
+        style={{width:'80%'}}
+        {...register1("password", { required: true })}
+        />
+      {error && error.detail && <p style={{ color: "red", fontSize: 15,marginTop:10 }}>
+        *{error.detail}
 
-      <Button
+      </p>}
+   <br/>
+      {loading ? <div style={{marginTop:30}}><Spinner animation="grow" variant={color} style={{ color: color }} size='sm' />{' '}<Spinner animation="grow" variant={color} style={{ color: color }} size='sm' />{ ' '}<Spinner animation="grow" variant={color} style={{color:color}} size='sm'  /></div> :      <Button
         type="submit"
         style={{
           height: 35,
           backgroundColor: color,
-          color: "white",
+            color: "white",
+          margin:'20px 0 10px 0',
           borderRadius: 5,
-          margin:'10px 0',
 
           border: "none",
           outline: "none",
@@ -75,29 +144,36 @@ const Auth = (props) => {
         variant="contained"
       >
         Submit
-      </Button>
+      </Button>}
     </form>
   );
 
   let registerForm = (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
+    <form key={1}  onSubmit={handleSubmit(onSubmit)}>
 
-        className={classes.text}
-        type="text"
-        placeholder="First Name"
-
-        {...register("firstname", { required: true })}
-      />
-      <input
+      <Row >
+        <Col xs={12} sm={6} style={{width:'100%'}}>
+        <input
+className={classes.text}
+type="text"
+placeholder="First Name"
+defaultValue=''
+{...register("firstname", { required: true })}
+/>
+        </Col>
+        <Col xs={12} sm={6} style={{width:'100%'}}>
+          <input
         className={classes.text}
         type="text"
         placeholder="Last Name"
 
         {...register("lastname", { required: true })}
       />
+        </Col>
+      </Row>
+      
+     
         <input
-
 className={classes.text}
 type="text"
 placeholder="Organization"
@@ -105,25 +181,27 @@ placeholder="Organization"
 {...register("organization", { required: true })}
 />
       <input
-
+        key={3}
         className={classes.text}
         type="email"
         placeholder="Email"
 
         {...register("email", { required: true })}
-        />
-      <br />
+      />
+      {error && error.email &&  <p style={{ color: "red", fontSize: 13 }}>
+          {error.email}
+        </p>}
       <input
-
         className={classes.text}
         type="password"
         placeholder="Password"
 
         {...register("password", { required: true, minLength: 5 })}
         />
-
+{error && error.password &&  <p style={{ color: "red", fontSize: 13 }}>
+          {error.password}
+        </p>}
       <input
-
         className={classes.text}
         type="password"
         placeholder="Confirm Password"
@@ -136,8 +214,12 @@ placeholder="Organization"
           {errors.confirmPassword.message}
         </p>
       )}
-          <br/>
-                <Button
+      {error && error.confirm_password &&  <p style={{ color: "red", fontSize: 13 }}>
+          {error.confirm_password}
+        </p>}
+      <br />
+      
+      {loading ? <div style={{margin:10}}><Spinner animation="grow" variant={color} style={{ color: color }} size='sm' />{' '}<Spinner animation="grow" variant={color} style={{ color: color }} size='sm' />{ ' '}<Spinner animation="grow" variant={color} style={{color:color}} size='sm'  /></div> :      <Button
         type="submit"
         style={{
           height: 35,
@@ -152,7 +234,8 @@ placeholder="Organization"
         variant="contained"
       >
         Submit
-      </Button>
+      </Button>}
+           
     </form>
   );
 
@@ -181,7 +264,7 @@ placeholder="Organization"
 
                 {mode == "Login" ? (
                   <p>
-                    Don't have Account,{" "}
+                    Don't have Account ?,{" "}
                     <span
                       onClick={() => setMode("Sign Up")}
                       style={{ color: color, cursor: "pointer" }}
@@ -192,7 +275,7 @@ placeholder="Organization"
                   </p>
                 ) : (
                   <p>
-                    Already have Account,{" "}
+                    Already have Account ?,{" "}
                     <span
                       onClick={() => setMode("Login")}
                       style={{ color: color, cursor: "pointer" }}

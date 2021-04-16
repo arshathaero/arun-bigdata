@@ -21,15 +21,15 @@ export function* signupSaga(action) {
   console.log(registerData)
     try {
       const response = yield axios.post('/accounts/signup/', registerData);
-      
+      action.form()
 
       yield put(actions.signupSuccess(response.data));
     } catch (error) {
       console.log(error.response);
       let err = error.response.data;
       yield put(actions.signupFail(err));
-      yield delay(3000);
-      yield put(actions.signupFail(null));
+      // yield delay(3000);
+      // yield put(actions.signupFail(null));
     }
 }
   
@@ -38,41 +38,24 @@ export function* signupSaga(action) {
 export function* loginSaga(action) {
     yield put(actions.loginStart());
     let data = {
-      username: action.username,
+      email: action.email,
       password: action.password,
     };
   
     try {
-      const response = yield axios.post("/token/create/", data);
+      const response = yield axios.post("/accounts/login/token/", data);
       let loginToken = response.data;
   
-      const notificationCount = yield axios.get("/notification/all/", {
-        headers: {
-          Authorization: "Bearer " + loginToken.access, //the token is a variable which holds the token
-        },
-      });
-      yield call(
-        [localStorage, "setItem"],
-        "notificationCount",
-        notificationCount.data.length == 0 ? 0 : notificationCount.data.length
-      );
-  
       yield call([localStorage, "setItem"], "token", loginToken.access);
-      yield call([localStorage, "setItem"], "username", loginToken.username);
-      yield call(
-        [localStorage, "setItem"],
-        "accountType",
-        loginToken.accountType
-      );
-      yield call([localStorage, "setItem"], "inviteCode", loginToken.inviteCode);
+
+      // window.location.href = '/'
   
       yield put(actions.loginSuccess(loginToken));
     } catch (error) {
       console.log(error.response);
-      let err = error.response.data.detail;
+      let err = error.response.data;
   
       yield put(actions.loginFail(err));
-      yield delay(3000);
-      yield put(actions.loginFail(null));
+     
     }
   }
