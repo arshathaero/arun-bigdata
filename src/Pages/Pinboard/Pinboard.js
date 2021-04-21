@@ -18,8 +18,8 @@ const Pinboard= () =>{
         onDrag={(e)=>console.log(e)}
         onStop={(e)=>console.log(e)}>
         <div>
-          <div className="handle">Drag from here</div>
-          <div>This readme is really dragging on...</div>
+          {/* <div className="handle">Drag from here</div>
+          <div>Pinboard</div> */}
         </div>
       </Draggable>
         </div>

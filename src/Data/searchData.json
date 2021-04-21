@@ -1,32 +1,33 @@
 {
     "query":"SELECT `Country`,`Item Type`,sum(`Profit`) FROM big_data WHERE `Country` IN ('India','Canada') AND `Item Type` IN ('Fruits','Vegetables') GROUP BY `Country`,`Item Type`",
-    "columns":[
-       "Country",
-       "Item Type",
-       "sum(Profit)"
-    ],
-    "dataset":[
-       {
-          "Country":"India",
-          "Item_Type":"Fruits",
-          "sum":48845.880000000005
-       },
-       {
-          "Country":"Canada",
-          "Item_Type":"Fruits",
-          "sum":46997.41
-       },
-       {
-          "Country":"Canada",
-          "Item_Type":"Vegetables",
-          "sum":3309527.12
-       },
-       {
-          "Country":"India",
-          "Item_Type":"Vegetables",
-          "sum":1224532.6099999999
-       }
-    ],
+    
+    "data":{
+      "columns":[{"title" : "Country"},{"title" : "Product Category"},{"title" : "sum(profit)"}],
+      "dataResponse":[
+         {
+            "Country":"India",
+            "Product Category":"Fruits",
+            "sum(profit)":48845.880000000005
+         },
+         {
+           "Country":"India",
+           "Product Category":"ss",
+           "sum(profit)":4845.880000000005
+        },
+        {
+           "Country":"India",
+           "Product Category":"d",
+           "sum(profit)":3845.880000000005
+        },
+        {
+           "Country":"India",
+           "Product Category":"Fruits",
+           "sum(profit)":545.880000000005
+        }
+         
+      ]
+    }
+    ,
     "date_filtered":{
        "Day":[
           

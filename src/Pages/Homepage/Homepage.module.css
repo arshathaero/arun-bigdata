@@ -21,7 +21,35 @@
     transform: scale(1.3);
 
 }
+.text{
+    border:none;
+    outline: none;
+    background-color: #EFF2F6;
+    padding:8px;
+    width:100%;
+    border-radius: 5px;
+}
 
 .import input{
     display: none;
+}
+
+.mymodal {
+    width: 90vw;
+    
+    max-width: 600vw;
+  }
+
+
+
+
+
+
+
+@media only screen  and (max-width: 500px) {
+
+
+    .text{
+        width:100%
+    }
 }

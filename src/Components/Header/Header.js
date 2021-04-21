@@ -58,7 +58,7 @@ const Header = (props) => {
                                 <i style={{ fontSize: 20,marginTop:2,marginLeft:10}} className="fas fa-sign-out-alt"></i>
                             </div>
                             <div onClick={()=>props.history.push('/profile')}  style={{ float: 'right',boxShadow:`0 0 5px ${color}`,cursor:'pointer',display:'flex',margin: 10, backgroundColor: color, padding: '5px 20px', color: 'white', borderRadius: 20, fontWeight: 'bold',height:35 }}>
-                                <p >cdscsdgdsgsf</p>
+                                <p >Profile</p>
                                 <i style={{ fontSize: 20,marginTop:2,marginLeft:10}} className="fas fa-long-arrow-alt-right"></i>
                             </div>
 
