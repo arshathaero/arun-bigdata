@@ -272,11 +272,11 @@ Table View              </Modal.Title>
     let displayData = data &&  data.length ? data.map(element => (
         <Col xs={6} sm={5} md={4} lg={3}>
             
-              <div style={{boxShadow:'0 0 10px #a8a8a8',backgroundColor:'#EFF2F6',borderRadius:10,height:'auto',marginTop:20,padding:10,color:'white'}}>
-              <Row onClick={()=>dataHandler(element.id)} style={{margin:'15px 5px 0 5px',cursor:'pointer'}}>
-                      <Col xs={9} md={9} lg={10}><p style={{textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden',color:color,fontWeight:'bold'}}>{element.fileName}</p></Col>
+              <div className={classes.dataSetDiv} >
+                <Row  style={{margin:'15px 5px 0 5px',cursor:'pointer'}}>
+                      <Col  onClick={() => dataHandler(element.id)} xs={9} md={9} lg={10}><p className={classes.dataSetName} style={{textOverflow:'ellipsis',whiteSpace:'nowrap',overflow:'hidden',fontWeight:'bold'}}>{element.fileName}</p></Col>
                       {/* <Col xs={1} md={1} lg={2}><p><i id={classes.icon} style={{fontSize:20}} class="fas fa-cloud-download-alt"></i></p></Col> */}
-                      <Col xs={1} md={1} lg={2}><i onClick={()=>deleteDataHandler(element.id)} id={classes.icon} style={{fontSize:20,color:color}}  class="fas fa-trash"></i></Col>
+                      <Col xs={1} md={1} lg={2}><i  onClick={()=>deleteDataHandler(element.id)} id={classes.icon} style={{fontSize:20}}  class="fas fa-trash"></i></Col>
                   </Row>
               </div>
               </Col>
